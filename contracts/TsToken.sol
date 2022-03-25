@@ -15,9 +15,19 @@ contract TsToken is ERC721URIStorage {
         console.log("TemmyScope NFT contract");
     }
 
+    function outOfNFT() public {
+        console.log("Oops!! We are currently out of NFTS to mint");
+    }
+
     //NFT minter
     function mintNFTbyTS() public {
         uint256 newItemId = __tokenId.current();
+
+        //limit mintable NFTs to 15 i.e. 0-14
+        if ( newItemId > 14 ){
+            outOfNFT();
+            return;
+        }
 
         _safeMint(msg.sender, newItemId);
 
